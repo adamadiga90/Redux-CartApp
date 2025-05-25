@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import ProductItem from "../components/ProductItem";
 const Home = () => {
   const [products, setProducts] = useState([]);
   const [limit, setLimit] = useState(30);
@@ -11,7 +11,7 @@ const Home = () => {
     const data = await response.json();
     if (data && data.products?.length > 0) {
       setProducts(data.products);
-      console.log(data);
+      console.log(data.products);
     }
   }
 
@@ -19,8 +19,10 @@ const Home = () => {
     fetchProducts();
   }, []);
   return (
-    <div>
-      {products.length > 0 ? products.map((product) => <div>s</div>) : null}
+    <div className="product-container">
+      {products.length > 0
+        ? products.map((product) => <ProductItem product={product} />)
+        : null}
     </div>
   );
 };

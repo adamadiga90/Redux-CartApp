@@ -1,39 +1,80 @@
-.App {
-  text-align: center;
+.app {
+  background-color: #fffdf6;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.product-container {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
-}
-
-.App-header {
-  min-height: 100vh;
+.product-box {
+  background-color: #faf1e6;
+  padding: 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  height: 450px;
+  border-radius: 10px;
 }
-
-.App-link {
-  color: rgb(112, 76, 182);
+.product-box img {
+  width: 250px;
 }
-
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+.product-box .image {
+  background-color: #faf6e9;
+  border-radius: 10px;
 }
+.product-box .image:hover img {
+  transition: 0.2s;
+  width: 300px;
+}
+.product-box .info {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+}
+.product-box .info p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 250px;
+}
+.product-box .info h2 {
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 250px;
+  height: 50px;
+  font-size: 20px;
+  margin-bottom: -10px;
+}
+.product-box:hover .info h2 {
+  /* width: 300px; */
+  white-space: normal;
+  text-overflow: none;
+}
+.add-to-cart {
+  cursor: pointer;
+  background: #000;
+  color: #f2f2f2;
+  outline: none;
+  padding: 10px 15px;
+  border: 2px solid #eae4d5;
+  border-radius: 4px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.add-to-cart:hover {
+  background: #eae4d5;
+  color: black;
+  transition: 0.5s;
+  border: 2px solid black;
+}
+/* #F2F2F2 */
+/* #EAE4D5 */
+/* #B6B09F */
+/* #000000 */
