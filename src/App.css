@@ -27,8 +27,11 @@
   border-radius: 10px;
 }
 .product-box .image:hover img {
+  border-radius: 10px;
   transition: 0.2s;
-  width: 300px;
+  width: 270px;
+  transform: rotate(1deg);
+  background-color: #f0ebdcd9;
 }
 .product-box .info {
   display: flex;
@@ -59,20 +62,20 @@
 }
 .add-to-cart {
   cursor: pointer;
-  background: #000;
-  color: #f2f2f2;
+  background: #83a85d;
+  color: #ddeb9d;
   outline: none;
   padding: 10px 15px;
-  border: 2px solid #eae4d5;
+  border: 2px solid #ddeb9d;
   border-radius: 4px;
   font-size: 20px;
   font-weight: bold;
 }
 .add-to-cart:hover {
-  background: #eae4d5;
-  color: black;
+  background: #ddeb9d;
+  color: #83a85d;
   transition: 0.5s;
-  border: 2px solid black;
+  border: 2px solid #83a85d;
 }
 /* #F2F2F2 */
 /* #EAE4D5 */
