@@ -6,7 +6,6 @@ const Home = () => {
   const cartIndex = useSelector((state) => state.cart.cartIndex);
   const cartMenu = useSelector((state) => state.cart.cartMenu);
   console.log(cartMenu);
-  console.log(cartMenu.length);
   const arrayOf = [
     { id: 1, name: "adam" },
     { id: 2, name: "kareem" },
@@ -15,11 +14,15 @@ const Home = () => {
     { id: 5, name: "omar" },
     { id: 6, name: "hussin" },
   ];
-  let answer = arrayOf.find((item) => item.id === 1);
-  // console.log(answer ? "yes" : "no");
+  // let answer = arrayOf.some((item) => item.id === 1);
+  // let newArrayOf = [{ id: 1, name: "adam" }];
+  // newArrayOf.some((item) => (item.id !== 19 ? newArrayOf.push(item) : null));
+  // console.log(answer);
+
+  // console.log(arrayOf.filter((item) => item.id !== 1));
 
   const [products, setProducts] = useState([]);
-  const [limit, setLimit] = useState(30);
+  const [limit, setLimit] = useState(10);
   const [skip, setSkip] = useState(0);
   async function fetchProducts() {
     const response = await fetch(

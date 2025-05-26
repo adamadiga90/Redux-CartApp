@@ -1,10 +1,24 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../features/cart/cartSlice";
+import { addToCart, removeFromCart } from "../features/cart/cartSlice";
 // import { addToCart } from "../features/cart/cartSlice";
 
 const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
+  const cartMenu = useSelector((state) => state.cart.cartMenu);
+  // console.log(cartMenu);
+
+  const isInCart = cartMenu.some((item) => item.id === product.id);
+  // isInCart
+  //   ?
+  // () => dispatch(addToCart({ product: product, id: product.id }))
+  // : () => dispatch(removeFromCart({ id: product.id }))
+  // const handleClick = () => {
+  //   if (isInCart) {
+  //     dispatch(addToCart({ product: product, id: product.id }));
+  //   }
+  //   // : dispatch(removeFromCart({ id: product.id }));
+  // };
 
   return (
     <div className="product-box" key={product.id}>
@@ -17,11 +31,13 @@ const ProductItem = ({ product }) => {
       </div>
       <button
         onClick={() =>
-          dispatch(addToCart({ product: product, id: product.id }))
+          isInCart
+            ? dispatch(removeFromCart({ id: product.id }))
+            : dispatch(addToCart({ product: product, id: product.id }))
         }
         className="add-to-cart"
       >
-        Add To Cart
+        <span>{!isInCart ? `Add To Cart` : `Remove From Cart`}</span>
       </button>
     </div>
   );
