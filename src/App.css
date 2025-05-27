@@ -77,6 +77,33 @@
   transition: 0.5s;
   border: 2px solid #83a85d;
 }
+.price-button {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.price-button .price {
+  background-color: #e3ddc7;
+  border-radius: 3px;
+  color: #83a85d;
+  font-weight: bold;
+  padding: 4px 2px;
+}
+.cart-page {
+  display: flex;
+  /* align-items: center; */
+  justify-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+.total-box {
+  background-color: #83a85d;
+  font-size: 30px;
+  font-weight: bold;
+  width: auto;
+  display: block;
+  padding: 20px;
+}
 /* #F2F2F2 */
 /* #EAE4D5 */
 /* #B6B09F */

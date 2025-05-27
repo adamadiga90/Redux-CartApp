@@ -5,19 +5,24 @@ import { useSelector } from "react-redux";
 const Home = () => {
   const cartIndex = useSelector((state) => state.cart.cartIndex);
   const cartMenu = useSelector((state) => state.cart.cartMenu);
-  console.log(cartMenu);
+  // console.log(cartMenu);
   const arrayOf = [
-    { id: 1, name: "adam" },
-    { id: 2, name: "kareem" },
-    { id: 3, name: "hamood" },
-    { id: 4, name: "ali" },
-    { id: 5, name: "omar" },
-    { id: 6, name: "hussin" },
+    { id: 1, name: "adam", value: 500 },
+    { id: 2, name: "kareem", value: 100 },
+    { id: 3, name: "hamood", value: 500 },
+    { id: 4, name: "ali", value: 3000 },
+    { id: 5, name: "omar", value: 1500 },
+    { id: 6, name: "hussin", value: 2000 },
   ];
-  // let answer = arrayOf.some((item) => item.id === 1);
+  // let answer = 0;
+  // for (let i = 0; i < arrayOf.length; i++) {
+  //   answer = answer + arrayOf[i].value;
+  // }
+  // console.log(arrayOf[0].value);
+  // console.log(answer);
+
   // let newArrayOf = [{ id: 1, name: "adam" }];
   // newArrayOf.some((item) => (item.id !== 19 ? newArrayOf.push(item) : null));
-  // console.log(answer);
 
   // console.log(arrayOf.filter((item) => item.id !== 1));
 

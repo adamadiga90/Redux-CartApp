@@ -29,16 +29,19 @@ const ProductItem = ({ product }) => {
         <h2>{product.title}</h2>
         <p>{product.description}</p>
       </div>
-      <button
-        onClick={() =>
-          isInCart
-            ? dispatch(removeFromCart({ id: product.id }))
-            : dispatch(addToCart({ product: product, id: product.id }))
-        }
-        className="add-to-cart"
-      >
-        <span>{!isInCart ? `Add To Cart` : `Remove From Cart`}</span>
-      </button>
+      <div className="price-button">
+        <span className="price">{product.price}$</span>
+        <button
+          onClick={() =>
+            isInCart
+              ? dispatch(removeFromCart({ id: product.id }))
+              : dispatch(addToCart({ product: product, id: product.id }))
+          }
+          className="add-to-cart"
+        >
+          <span>{!isInCart ? `Add To Cart` : `Remove From Cart`}</span>
+        </button>
+      </div>
     </div>
   );
 };
