@@ -5,38 +5,30 @@ import { useSelector } from "react-redux";
 const Home = () => {
   const cartIndex = useSelector((state) => state.cart.cartIndex);
   const cartMenu = useSelector((state) => state.cart.cartMenu);
-  // 1903
-  // console.log(window.scrollY);
-  // console.log(window.scrollY);
-  // 2840
-  // console.log(document.documentElement.scrollHeight);
-  // 937
-  // console.log(window.innerHeight);
-  // console.log(document.documentElement.scrollHeight - window.innerHeight);
 
-  function handleScroll() {
-    // if (
-    //   window.scrollY ===
-    //   document.documentElement.scrollHeight - window.innerHeight
-    // ) {
-    //   console.log("noo");
-    // }
-    // window.scrollTo({
-    //   top: document.documentElement.scrollHeight,
-    //   behavior: "smooth",
-    // });
-    // console.log(document.documentElement.scrollHeight);
-  }
-
-  let screenPosition = useState(window.scrollY);
-  useEffect(() => {
-    console.log("hello");
-  }, [screenPosition]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [products, setProducts] = useState([]);
-  const [limit, setLimit] = useState(22);
+  const [limit, setLimit] = useState(12);
   const [skip, setSkip] = useState(0);
+
+  function handleScroll() {
+    if (
+      window.scrollY ===
+      document.documentElement.scrollHeight - window.innerHeight
+    ) {
+      console.log("hello");
+
+      setLimit(limit + 10);
+      fetchProducts();
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  });
+
   async function fetchProducts() {
     try {
       setLoading(true);
@@ -45,9 +37,14 @@ const Home = () => {
       );
       const data = await response.json();
       if (data && data.products?.length > 0) {
-        setLoading(false);
-        setProducts(data.products);
-        // console.log(data.products);
+        if (products.length > 0) {
+          let newProducts = [...products, ...data.products];
+          setProducts(newProducts);
+          console.log(products);
+        } else {
+          setLoading(false);
+          setProducts(data.products);
+        }
       }
     } catch (e) {
       setLoading(false);
@@ -67,9 +64,10 @@ const Home = () => {
   }
   return (
     <div className="product-container">
-      <button onClick={handleScroll}>
+      {/* <button onClick={handleScroll}>
+        22
         {document.documentElement.scrollHeight}
-      </button>
+      </button> */}
       {products.length > 0
         ? products.map((product) => (
             <ProductItem key={product.id} product={product} />

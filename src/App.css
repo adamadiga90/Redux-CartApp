@@ -110,14 +110,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
 }
 
 .loading-spinner {
   width: 50px;
   height: 50px;
-  border: 5px solid #ddeb9d; /* Light grey */
-  border-top: 5px solid #83a85d; /* Blue */
+  border: 5px solid #ddeb9d;
+  border-top: 5px solid #83a85d;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
