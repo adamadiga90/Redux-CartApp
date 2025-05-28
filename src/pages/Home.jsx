@@ -5,46 +5,71 @@ import { useSelector } from "react-redux";
 const Home = () => {
   const cartIndex = useSelector((state) => state.cart.cartIndex);
   const cartMenu = useSelector((state) => state.cart.cartMenu);
-  // console.log(cartMenu);
-  const arrayOf = [
-    { id: 1, name: "adam", value: 500 },
-    { id: 2, name: "kareem", value: 100 },
-    { id: 3, name: "hamood", value: 500 },
-    { id: 4, name: "ali", value: 3000 },
-    { id: 5, name: "omar", value: 1500 },
-    { id: 6, name: "hussin", value: 2000 },
-  ];
-  // let answer = 0;
-  // for (let i = 0; i < arrayOf.length; i++) {
-  //   answer = answer + arrayOf[i].value;
-  // }
-  // console.log(arrayOf[0].value);
-  // console.log(answer);
+  // 1903
+  // console.log(window.scrollY);
+  // console.log(window.scrollY);
+  // 2840
+  // console.log(document.documentElement.scrollHeight);
+  // 937
+  // console.log(window.innerHeight);
+  // console.log(document.documentElement.scrollHeight - window.innerHeight);
 
-  // let newArrayOf = [{ id: 1, name: "adam" }];
-  // newArrayOf.some((item) => (item.id !== 19 ? newArrayOf.push(item) : null));
+  function handleScroll() {
+    // if (
+    //   window.scrollY ===
+    //   document.documentElement.scrollHeight - window.innerHeight
+    // ) {
+    //   console.log("noo");
+    // }
+    // window.scrollTo({
+    //   top: document.documentElement.scrollHeight,
+    //   behavior: "smooth",
+    // });
+    // console.log(document.documentElement.scrollHeight);
+  }
 
-  // console.log(arrayOf.filter((item) => item.id !== 1));
-
+  let screenPosition = useState(window.scrollY);
+  useEffect(() => {
+    console.log("hello");
+  }, [screenPosition]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [products, setProducts] = useState([]);
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(22);
   const [skip, setSkip] = useState(0);
   async function fetchProducts() {
-    const response = await fetch(
-      `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
-    );
-    const data = await response.json();
-    if (data && data.products?.length > 0) {
-      setProducts(data.products);
-      // console.log(data.products);
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
+      );
+      const data = await response.json();
+      if (data && data.products?.length > 0) {
+        setLoading(false);
+        setProducts(data.products);
+        // console.log(data.products);
+      }
+    } catch (e) {
+      setLoading(false);
+      setError(e.message);
     }
   }
 
   useEffect(() => {
     fetchProducts();
   }, []);
+  if (loading) {
+    return (
+      <div className="spinner-container">
+        <div className="loading-spinner"></div>
+      </div>
+    );
+  }
   return (
     <div className="product-container">
+      <button onClick={handleScroll}>
+        {document.documentElement.scrollHeight}
+      </button>
       {products.length > 0
         ? products.map((product) => (
             <ProductItem key={product.id} product={product} />
