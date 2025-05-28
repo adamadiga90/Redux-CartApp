@@ -19,6 +19,7 @@ const Home = () => {
     ) {
       console.log("hello");
 
+      setSkip(limit);
       setLimit(limit + 10);
       fetchProducts();
     }
@@ -31,7 +32,9 @@ const Home = () => {
 
   async function fetchProducts() {
     try {
-      setLoading(true);
+      if (products <= 0) {
+        setLoading(true);
+      }
       const response = await fetch(
         `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
       );
@@ -64,10 +67,6 @@ const Home = () => {
   }
   return (
     <div className="product-container">
-      {/* <button onClick={handleScroll}>
-        22
-        {document.documentElement.scrollHeight}
-      </button> */}
       {products.length > 0
         ? products.map((product) => (
             <ProductItem key={product.id} product={product} />

@@ -48,7 +48,6 @@
   width: 250px;
 }
 .product-box .info h2 {
-  /* white-space: nowrap; */
   overflow: hidden;
   text-overflow: ellipsis;
   width: 250px;
@@ -62,6 +61,7 @@
   text-overflow: none;
 }
 .add-to-cart {
+  white-space: nowrap;
   cursor: pointer;
   background: #83a85d;
   color: #ddeb9d;
@@ -91,13 +91,18 @@
   padding: 4px 2px;
 }
 .cart-page {
+  position: relative;
   display: flex;
   /* align-items: center; */
   justify-items: center;
   flex-direction: column;
-  width: 100%;
+  max-height: calc(100vh + 80px);
+  margin: 0;
+  padding: 0;
 }
 .total-box {
+  position: fixed;
+  bottom: 0;
   background-color: #83a85d;
   font-size: 30px;
   font-weight: bold;
