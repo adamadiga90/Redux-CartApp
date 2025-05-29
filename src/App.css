@@ -135,6 +135,12 @@
     transform: rotate(360deg);
   }
 }
+.product-page-container {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 /* #F2F2F2 */
 /* #EAE4D5 */
 /* #B6B09F */

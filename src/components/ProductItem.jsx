@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../features/cart/cartSlice";
+import { Link } from "react-router-dom";
+import ProductPage from "../pages/ProductPage";
 // import { addToCart } from "../features/cart/cartSlice";
 
 const ProductItem = ({ product }) => {
@@ -22,13 +24,15 @@ const ProductItem = ({ product }) => {
 
   return (
     <div className="product-box" key={product.id}>
-      <div className="image">
-        <img src={product.images[0]} alt="" />
-      </div>
-      <div className="info">
-        <h2>{product.title}</h2>
-        <p>{product.description}</p>
-      </div>
+      <Link to={`/products/${product.id}`}>
+        <div className="image">
+          <img src={product.images[0]} alt="" />
+        </div>
+        <div className="info">
+          <h2>{product.title}</h2>
+          <p>{product.description}</p>
+        </div>
+      </Link>
       <div className="price-button">
         <span className="price">{product.price}$</span>
         <button
