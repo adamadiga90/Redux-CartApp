@@ -6,6 +6,7 @@ const ProductPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [currentImg, setCurrentImg] = useState(0);
+  const [imgLoading, setImgLoading] = useState(false);
 
   const { id } = useParams();
 
@@ -17,6 +18,9 @@ const ProductPage = () => {
       if (data) {
         setLoading(false);
         setProduct(data);
+        console.log(data.images.length);
+
+        setCurrentImg(0);
       }
     } catch (e) {
       setLoading(false);
@@ -27,13 +31,15 @@ const ProductPage = () => {
   useEffect(() => {
     fetchProduct();
   }, [id]);
-  let currentImage = fallbackImage;
-  // const currentImage = product.images.?currentImg || ""
-  if (product.images.length > 0) {
-    currentImg = product.images[currentImg];
-  }
+
+  const hasImg = product.images && product.images.length > 0;
   const fallbackImage =
     "https://via.placeholder.com/300?text=No+Image+Available";
+
+  function handleClick(index) {
+    setCurrentImg(index);
+  }
+
   if (loading) {
     return (
       <div className="spinner-container">
@@ -45,7 +51,28 @@ const ProductPage = () => {
   return (
     <div className="product-page-container">
       <div className="images-container">
-        <img src={currentImage} alt="" />
+        <div className="arrow left-arrow">
+          <img
+            src="https://img.icons8.com/?size=100&id=yuV1lR4yTlZo&format=png&color=83A85D"
+            alt=""
+          />
+        </div>
+        <img
+          className="the-img"
+          src={hasImg ? product.images[currentImg] : fallbackImage}
+          alt=""
+        />
+        <div className="dots-container">
+          {hasImg
+            ? product.images.map((dot, index) => (
+                <span
+                  onClick={() => handleClick(index)}
+                  className={`dot ${index === currentImg ? `active` : ``} `}
+                  key={index}
+                ></span>
+              ))
+            : null}
+        </div>
       </div>
       <div className="info-container">
         <h1>{product.title}</h1>
