@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ProductItem from "../components/ProductItem";
 import { useSelector } from "react-redux";
 
@@ -28,9 +28,9 @@ const Home = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  });
+  }, [handleScroll]);
 
-  async function fetchProducts() {
+  const fetchProducts = useCallback(async () => {
     try {
       if (products <= 0) {
         setLoading(true);
@@ -53,7 +53,7 @@ const Home = () => {
       setLoading(false);
       setError(e.message);
     }
-  }
+  }, []);
 
   useEffect(() => {
     fetchProducts();
