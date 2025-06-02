@@ -3,30 +3,8 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div
-      style={{
-        height: "60px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: " 0 40px",
-        color: "#83a85d",
-        backgroundColor: "#DDEB9D",
-      }}
-    >
-      <Link
-        to={"/"}
-        style={{
-          textDecoration: "none",
-          cursor: "pointer",
-          backgroundColor: "#83a85d",
-          color: "#DDEB9D",
-          padding: "3px 10px",
-          borderRadius: "5px",
-          fontSize: "30px",
-          fontWeight: "bold",
-        }}
-      >
+    <div className="navbar" style={{}}>
+      <Link to={"/"} style={{}} className="router-link">
         <span>REDUX SHOPE</span>
       </Link>
       <Link to={`cart`}>

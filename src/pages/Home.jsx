@@ -75,7 +75,7 @@ const Home = () => {
   //   );
   // }
   return (
-    <div className={!loading && `product-container`}>
+    <div className={`product-container`}>
       {loading && (
         <div className="spinner-container">
           <div className="loading-spinner"></div>
@@ -86,7 +86,7 @@ const Home = () => {
             <ProductItem key={product.id} product={product} />
           ))
         : null}
-      {!smallLoading && <div>Loading...</div>}
+      {/* {smallLoading && <div>Loading...</div>} */}
     </div>
   );
 };

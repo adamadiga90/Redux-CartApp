@@ -20,7 +20,7 @@ const CartPage = () => {
   }, [cartMenu]);
   return (
     <div className="cart-page">
-      {/* <div className="total-box">Total: {Math.round(price)}$</div> */}
+      <div className="total-box">Total: {Math.round(price)}$</div>
       {cartMenu.length > 0 ? (
         <div className="product-container">
           {cartMenu.map((item) => (
