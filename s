@@ -3757,7 +3757,7 @@
       "rating": 3.26,
       "stock": 7,
       "tags": [
-        "kitchen tools",
+        nkitchen tools",
         "cutlery"
       ],
       "sku": "KIT-BRD-KNI-064",

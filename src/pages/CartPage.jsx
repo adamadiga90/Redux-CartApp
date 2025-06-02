@@ -20,18 +20,18 @@ const CartPage = () => {
   }, [cartMenu]);
   return (
     <div className="cart-page">
-      <div className="product-container">
-        {cartMenu.length > 0 ? (
-          cartMenu.map((item) => (
+      {/* <div className="total-box">Total: {Math.round(price)}$</div> */}
+      {cartMenu.length > 0 ? (
+        <div className="product-container">
+          {cartMenu.map((item) => (
             <div>
               <ProductItem product={item} />
             </div>
-          ))
-        ) : (
-          <h1>There are no products in your cart...</h1>
-        )}{" "}
-      </div>
-      <div className="total-box">Total: {Math.round(price)}$</div>
+          ))}
+        </div>
+      ) : (
+        <h1>There are no products in your cart...</h1>
+      )}{" "}
     </div>
   );
 };

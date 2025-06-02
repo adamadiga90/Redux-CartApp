@@ -8,19 +8,8 @@ import ProductPage from "../pages/ProductPage";
 const ProductItem = ({ product }) => {
   const dispatch = useDispatch();
   const cartMenu = useSelector((state) => state.cart.cartMenu);
-  // console.log(cartMenu);
 
   const isInCart = cartMenu.some((item) => item.id === product.id);
-  // isInCart
-  //   ?
-  // () => dispatch(addToCart({ product: product, id: product.id }))
-  // : () => dispatch(removeFromCart({ id: product.id }))
-  // const handleClick = () => {
-  //   if (isInCart) {
-  //     dispatch(addToCart({ product: product, id: product.id }));
-  //   }
-  //   // : dispatch(removeFromCart({ id: product.id }));
-  // };
 
   return (
     <div className="product-box" key={product.id}>

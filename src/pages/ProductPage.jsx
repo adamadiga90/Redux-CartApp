@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { addToCart, removeFromCart } from "../features/cart/cartSlice";
 
 const ProductPage = () => {
   const [product, setProduct] = useState({});
@@ -7,6 +9,10 @@ const ProductPage = () => {
   const [error, setError] = useState("");
   const [currentImg, setCurrentImg] = useState(0);
   const [imgLoading, setImgLoading] = useState(false);
+  const dispatch = useDispatch();
+  const cartMenu = useSelector((state) => state.cart.cartMenu);
+
+  const isInCart = cartMenu.some((item) => item.id === product.id);
 
   const { id } = useParams();
 
@@ -95,7 +101,19 @@ const ProductPage = () => {
       <div className="info-container">
         <h1>{product.title}</h1>
         <p className="description">{product.description}</p>
-        <p className="price">price: {product.price}$</p>
+        <div className="price-and-button">
+          <p className="price">price: {product.price}$</p>
+          <button
+            onClick={() =>
+              isInCart
+                ? dispatch(removeFromCart({ id: product.id }))
+                : dispatch(addToCart({ product: product, id: product.id }))
+            }
+            className="add-to-cart"
+          >
+            <span>{!isInCart ? `Add To Cart` : `Remove From Cart`}</span>
+          </button>
+        </div>
       </div>
     </div>
   );
