@@ -69,18 +69,15 @@ const Home = () => {
   useEffect(() => {
     fetchProducts();
   }, [skip]);
-  // if (loading) {
-  //   return (
-
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div className="spinner-container">
+        <div className="loading-spinner"></div>
+      </div>
+    );
+  }
   return (
     <div className={`product-container`}>
-      {loading && (
-        <div className="spinner-container">
-          <div className="loading-spinner"></div>
-        </div>
-      )}
       {products.length > 0
         ? products.map((product) => (
             <ProductItem key={product.id} product={product} />
