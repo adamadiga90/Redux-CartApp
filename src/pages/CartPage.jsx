@@ -53,7 +53,7 @@ const CartPage = () => {
           <div className="summary">
             <h2>Summary</h2>
             <div className="total-box">Total: {Math.round(price)}$</div>
-            <button className="checkout">Checkout</button>
+            <button className="add-to-cart">Checkout</button>
           </div>
         </div>
       ) : (
