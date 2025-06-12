@@ -8,7 +8,6 @@ const CartPage = () => {
 
   const [price, setPrice] = useState(0);
   const dispatch = useDispatch();
-  // console.log(cartMenu[0].price);
 
   function calculatePrice() {
     let newPrice = 0;

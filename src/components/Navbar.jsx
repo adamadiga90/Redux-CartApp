@@ -7,7 +7,6 @@ const Navbar = () => {
   function handleSubmit(e) {
     e.preventDefault();
     setSearchName(name);
-    console.log(name);
   }
 
   return (

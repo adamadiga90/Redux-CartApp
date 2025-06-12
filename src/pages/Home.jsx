@@ -3,7 +3,6 @@ import ProductItem from "../components/ProductItem";
 import { useSelector } from "react-redux";
 
 const Home = () => {
-  const cartIndex = useSelector((state) => state.cart.cartIndex);
   const cartMenu = useSelector((state) => state.cart.cartMenu);
 
   const [loading, setLoading] = useState(false);
@@ -13,6 +12,7 @@ const Home = () => {
   const [skip, setSkip] = useState(0);
   const [smallLoading, setSmallLoading] = useState(false);
   const [isSearched, setIsSearched] = useState(true);
+  const searched = "phone";
   function handleScroll() {
     // if (smallLoading) return;
     if (
@@ -20,7 +20,7 @@ const Home = () => {
         document.documentElement.scrollHeight - window.innerHeight &&
       !smallLoading
     ) {
-      if (!smallLoading) {
+      if (!smallLoading && !searched) {
         setSkip((prevSkip) => prevSkip + limit);
       }
     }
@@ -47,9 +47,11 @@ const Home = () => {
         console.log("Loading");
       }
       const response = await fetch(
-        `https://dummyjson.com/products?limit=${limit}&skip=${skip}${
-          isSearched && `title=${skip}`
-        }`
+        searched
+          ? `https://dummyjson.com/products/search?q=${searched}`
+          : `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
+        //  +
+        // `${isSearched && searched}`
       );
       const data = await response.json();
       if (data?.products?.length > 0) {
