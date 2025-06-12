@@ -12,7 +12,7 @@ const Home = () => {
   const [limit, setLimit] = useState(12);
   const [skip, setSkip] = useState(0);
   const [smallLoading, setSmallLoading] = useState(false);
-
+  const [isSearched, setIsSearched] = useState(true);
   function handleScroll() {
     // if (smallLoading) return;
     if (
@@ -47,7 +47,9 @@ const Home = () => {
         console.log("Loading");
       }
       const response = await fetch(
-        `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
+        `https://dummyjson.com/products?limit=${limit}&skip=${skip}${
+          isSearched && `title=${skip}`
+        }`
       );
       const data = await response.json();
       if (data?.products?.length > 0) {
