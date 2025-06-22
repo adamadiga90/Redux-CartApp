@@ -71,13 +71,13 @@ const ProductPage = () => {
       <div className="images-container">
         <div onClick={handleLeft} className="arrow left-arrow">
           <img
-            src="https://img.icons8.com/?size=100&id=yuV1lR4yTlZo&format=png&color=83A85D"
+            src="https://img.icons8.com/?size=100&id=yuV1lR4yTlZo&format=png&color=131a85cc"
             alt=""
           />
         </div>
         <div onClick={handleRight} className="arrow right-arrow">
           <img
-            src="https://img.icons8.com/?size=100&id=yuV1lR4yTlZo&format=png&color=83A85D"
+            src="https://img.icons8.com/?size=100&id=yuV1lR4yTlZo&format=png&color=131a85cc"
             alt=""
           />
         </div>
