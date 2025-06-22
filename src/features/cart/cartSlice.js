@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  searchName: "",
+  search: { name: "", isSearch: false },
   price: 0,
   cartMenu: [],
 };
@@ -24,13 +24,17 @@ export const cartSlice = createSlice({
       );
       // state.cartMenu = [1];
     },
-    // calculatePrice: (state) {
-    //   let newPrice = state.cartMenu.reducer((accumulator, currentValue) => )
-
-    // }
+    changeSearch: (state, action) => {
+      state.search.name = action.payload.search;
+      state.search.isSearch = true;
+    },
+    turnSearchDown: (state) => {
+      state.search.isSearch = false;
+    },
   },
 });
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, changeSearch, turnSearchDown } =
+  cartSlice.actions;
 export default cartSlice.reducer;
 
 // login: (state, action) => {

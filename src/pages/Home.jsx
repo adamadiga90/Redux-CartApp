@@ -1,36 +1,38 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ProductItem from "../components/ProductItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { turnSearchDown } from "../features/cart/cartSlice";
 
 const Home = () => {
+  const dispatch = useDispatch();
   const cartMenu = useSelector((state) => state.cart.cartMenu);
-
+  const search = useSelector((state) => state.cart.search);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [products, setProducts] = useState([]);
   const [limit, setLimit] = useState(12);
   const [skip, setSkip] = useState(0);
   const [smallLoading, setSmallLoading] = useState(false);
-  const [isSearched, setIsSearched] = useState(true);
-  const searched = "phone";
+  // const [isSearched, setIsSearched] = useState(false);
+  // const searched = "phone";
+  console.log(search);
+
   function handleScroll() {
-    // if (smallLoading) return;
     if (
       window.scrollY ===
         document.documentElement.scrollHeight - window.innerHeight &&
       !smallLoading
     ) {
-      if (!smallLoading && !searched) {
+      if (!smallLoading && !search.isSearch) {
         setSkip((prevSkip) => prevSkip + limit);
       }
     }
   }
 
   useEffect(() => {
-    console.log("Updated limit:", limit);
-    console.log("Updated skip:", skip);
-    console.log(products);
-    // console.log(smallLoading);
+    // console.log("Updated limit:", limit);
+    // console.log("Updated skip:", skip);
+    // console.log(products);
   }, [limit, products, smallLoading]);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -39,23 +41,27 @@ const Home = () => {
 
   async function fetchProducts() {
     try {
+      // if (search.isSearch) {
+      //   setProducts([]);
+      // }
       if (products <= 0) {
         setLoading(true);
       }
-      if (products > 0) {
+      if (products > 0 && !search.isSearch) {
         setSmallLoading(true);
         console.log("Loading");
       }
       const response = await fetch(
-        searched
-          ? `https://dummyjson.com/products/search?q=${searched}`
+        search.isSearch
+          ? `https://dummyjson.com/products/search?q=${search.name}`
           : `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
-        //  +
-        // `${isSearched && searched}`
       );
       const data = await response.json();
       if (data?.products?.length > 0) {
-        if (products.length > 0) {
+        if (search.isSearch) {
+          setProducts(data.products);
+          dispatch(turnSearchDown);
+        } else if (products.length > 0 && !search.isSearch) {
           setProducts((prevProducts) => [...prevProducts, ...data.products]);
           console.log(products);
           setSmallLoading(false);
@@ -71,8 +77,11 @@ const Home = () => {
   }
 
   useEffect(() => {
+    console.log(search.isSearch);
+    console.log("HEllo");
+
     fetchProducts();
-  }, [skip]);
+  }, [skip, search]);
   if (loading) {
     return (
       <div className="spinner-container">
@@ -87,7 +96,6 @@ const Home = () => {
             <ProductItem key={product.id} product={product} />
           ))
         : null}
-      {/* {smallLoading && <div>Loading...</div>} */}
     </div>
   );
 };

@@ -1,18 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { changeSearch, turnSearchDown } from "../features/cart/cartSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const search = useSelector((state) => state.cart.search);
   const [name, setName] = useState("");
-  const [searchName, setSearchName] = useState("");
+  // const [searchName, setSearchName] = useState(search);
   function handleSubmit(e) {
     e.preventDefault();
-    setSearchName(name);
+    dispatch(changeSearch({ search: name }));
   }
 
   return (
     <div className="navbar" style={{}}>
       <Link to={"/"} style={{}} className="router-link">
-        <span>REDUX SHOPE</span>
+        <span onClick={dispatch(turnSearchDown())}>REDUX SHOPE</span>
       </Link>
       <form
         onSubmit={handleSubmit}
