@@ -7,16 +7,19 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const search = useSelector((state) => state.cart.search);
   const [name, setName] = useState("");
-  // const [searchName, setSearchName] = useState(search);
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(changeSearch({ search: name }));
   }
 
+  function handleLogoClick() {
+    dispatch(turnSearchDown());
+  }
+
   return (
     <div className="navbar" style={{}}>
       <Link to={"/"} style={{}} className="router-link">
-        <span onClick={dispatch(turnSearchDown())}>REDUX SHOPE</span>
+        <span onClick={handleLogoClick}>REDUX SHOPE</span>
       </Link>
       <form
         onSubmit={handleSubmit}

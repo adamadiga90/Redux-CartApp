@@ -24,13 +24,11 @@ const ProductPage = () => {
       if (data) {
         setLoading(false);
         setProduct(data);
-        console.log(data.images.length);
 
         setCurrentImg(0);
       }
     } catch (e) {
       setLoading(false);
-      console.log(e.message);
       setError(e.message);
     }
   }

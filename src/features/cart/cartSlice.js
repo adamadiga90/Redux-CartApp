@@ -36,15 +36,3 @@ export const cartSlice = createSlice({
 export const { addToCart, removeFromCart, changeSearch, turnSearchDown } =
   cartSlice.actions;
 export default cartSlice.reducer;
-
-// login: (state, action) => {
-//   state.name = action.payload.name;
-//   state.email = action.payload.email;
-//   state.isLoggedIn = true;
-
-// const handleLogin = () => {
-//   dispatch(login({
-//     name: 'John Doe',
-//     email: 'john@example.com'
-//   }));
-// };

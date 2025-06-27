@@ -13,9 +13,6 @@ const Home = () => {
   const [limit, setLimit] = useState(12);
   const [skip, setSkip] = useState(0);
   const [smallLoading, setSmallLoading] = useState(false);
-  // const [isSearched, setIsSearched] = useState(false);
-  // const searched = "phone";
-  console.log(search);
 
   function handleScroll() {
     if (
@@ -29,11 +26,7 @@ const Home = () => {
     }
   }
 
-  useEffect(() => {
-    // console.log("Updated limit:", limit);
-    // console.log("Updated skip:", skip);
-    // console.log(products);
-  }, [limit, products, smallLoading]);
+  useEffect(() => {}, [limit, products, smallLoading]);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -41,15 +34,11 @@ const Home = () => {
 
   async function fetchProducts() {
     try {
-      // if (search.isSearch) {
-      //   setProducts([]);
-      // }
       if (products <= 0) {
         setLoading(true);
       }
       if (products > 0 && !search.isSearch) {
         setSmallLoading(true);
-        console.log("Loading");
       }
       const response = await fetch(
         search.isSearch
@@ -63,7 +52,6 @@ const Home = () => {
           dispatch(turnSearchDown);
         } else if (products.length > 0 && !search.isSearch) {
           setProducts((prevProducts) => [...prevProducts, ...data.products]);
-          console.log(products);
           setSmallLoading(false);
         } else {
           setLoading(false);
@@ -77,9 +65,6 @@ const Home = () => {
   }
 
   useEffect(() => {
-    console.log(search.isSearch);
-    console.log("HEllo");
-
     fetchProducts();
   }, [skip, search]);
   if (loading) {
