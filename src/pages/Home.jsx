@@ -13,6 +13,8 @@ const Home = () => {
   const [limit, setLimit] = useState(12);
   const [skip, setSkip] = useState(0);
   const [smallLoading, setSmallLoading] = useState(false);
+  const [searchLoading, setSearchLoading] = useState(false);
+  let previousSkip = skip;
 
   function handleScroll() {
     if (
@@ -26,7 +28,6 @@ const Home = () => {
     }
   }
 
-  useEffect(() => {}, [limit, products, smallLoading]);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -34,6 +35,9 @@ const Home = () => {
 
   async function fetchProducts() {
     try {
+      if (search.isSearch) {
+        setSearchLoading(true);
+      }
       if (products <= 0) {
         setLoading(true);
       }
@@ -48,12 +52,19 @@ const Home = () => {
       const data = await response.json();
       if (data?.products?.length > 0) {
         if (search.isSearch) {
+          console.log("isSearch: true");
           setProducts(data.products);
-          dispatch(turnSearchDown);
-        } else if (products.length > 0 && !search.isSearch) {
+          setSearchLoading(false);
+        } else if (
+          products.length > 0 &&
+          !search.isSearch &&
+          previousSkip !== skip
+        ) {
+          console.log("load more products");
           setProducts((prevProducts) => [...prevProducts, ...data.products]);
           setSmallLoading(false);
-        } else {
+        } else if (!search.isSearch) {
+          console.log("isSearch: false");
           setLoading(false);
           setProducts(data.products);
         }
@@ -65,8 +76,10 @@ const Home = () => {
   }
 
   useEffect(() => {
+    console.log(search.isSearch);
+
     fetchProducts();
-  }, [skip, search]);
+  }, [skip, search.isSearch]);
   if (loading) {
     return (
       <div className="spinner-container">
