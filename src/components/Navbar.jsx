@@ -18,7 +18,7 @@ const Navbar = () => {
 
   return (
     <div className="navbar" style={{}}>
-      <Link to={"/"} style={{}} className="router-link">
+      <Link to={"/shop"} style={{}} className="router-link">
         <span onClick={handleLogoClick}>REDUX SHOPE</span>
       </Link>
       <form
